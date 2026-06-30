@@ -5,7 +5,12 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    keyword = None
+
+    if request.method == "POST":
+        keyword = request.form.get("keyword")
+
+    return render_template("index.html", keyword=keyword)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
